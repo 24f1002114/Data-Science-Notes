@@ -1,4 +1,4 @@
-
+#### [[A - Table of Content]]
 ---
 ###  Virtual environments
 - Virtual environments are independent groups of Python libraries, one for each project. 
@@ -21,6 +21,14 @@
   ```bash
 	source .venv/bin/activate
   ```
+- In Window Git Bash shell
+    ```bash
+	source .venv/Scripts/activate
+  ```
+- In Window Command Prompt  shell
+    ```cmd
+	.venv\Scripts\activate
+  ```
 - Your shell prompt will change to show the name of the activated environment.
 ### 3. Install Flask
 - Within the activated environment, use the following command to install Flask:
@@ -29,6 +37,7 @@
   ```
 - Flask is now installed.
 
+### Installation Flowchart
 ```mermaid
 graph LR
     A[Create an environment] --> B[Activate the environment]
