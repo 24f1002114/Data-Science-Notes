@@ -164,7 +164,7 @@ methods: {
 
 ```mermaid
 graph LR
-    A[User Clicks Button] --> B[@click triggers]
+    A[User Clicks Button] --> B["@click triggers"]
     B --> C[Method Runs]
     C --> D[Data Updates]
     D --> E[Page Re-renders]

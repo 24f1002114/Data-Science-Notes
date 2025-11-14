@@ -262,6 +262,7 @@ if __name__ == '__main__':
 
 ## RESTful URL Design
 
+
 ```mermaid
 graph TB
     A["/api/users"] --> B["GET - List all users"]
@@ -274,7 +275,9 @@ graph TB
     
     style A fill:#64b5f6,color:#fff,stroke:#1976d2,stroke-width:3px
     style D fill:#81c784,color:#fff,stroke:#388e3c,stroke-width:3px
+    
 ```
+
 
 ### URL Best Practices
 
