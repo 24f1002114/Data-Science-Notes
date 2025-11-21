@@ -1,4 +1,4 @@
-## [[A - Table of Content]]
+## [[A- Table of Content]]
 
 # Flask Routing
 

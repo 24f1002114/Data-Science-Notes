@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <style>
+        .done { text-decoration: line-through; color: gray; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>My Todos</h1>
+        
+        <!-- Input -->
+        <input v-model="newTodo" @keyup.enter="addTodo" placeholder="Add todo">
+        <button @click="addTodo">Add</button>
+        
+        <!-- List -->
+        <ul>
+            <li v-for="(todo, index) in todos" :key="index">
+                <input type="checkbox" v-model="todo.done">
+                <span :class="{ done: todo.done }">{{ todo.text }}</span>
+                <button @click="removeTodo(index)">Delete</button>
+            </li>
+        </ul>
+        
+        <!-- Summary -->
+        <p>{{ remaining }} remaining</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    newTodo: '',
+                    todos: [
+                        { text: 'Learn Vue', done: false },
+                        { text: 'Build a project', done: false }
+                    ]
+                }
+            },
+            computed: {
+                remaining() {
+                    return this.todos.filter(t => !t.done).length;
+                }
+            },
+            methods: {
+                addTodo() {
+                    if (this.newTodo.trim()) {
+                        this.todos.push({
+                            text: this.newTodo,
+                            done: false
+                        });
+                        this.newTodo = '';
+                    }
+                },
+                removeTodo(index) {
+                    this.todos.splice(index, 1);
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -1,10 +1,10 @@
-## 1) [[Flask Installation]]
-## 2) [[Flask App Routing]]
-### 3) [[Flask Database]]
-## 3) [[Jinja 2 - Templates Rendering and Static Files]]
-## 4) [[Flask APIs]]
-## 5) [[Flask Authentication]]
-## 6) [[Flask_restful API Web Framework]]
+## 1) [[1 Flask Installation]]
+## 2) [[2 Flask App Routing]]
+### 3) [[4 Flask Database]]
+## 3) [[8 Jinja 2 - Templates Rendering and Static Files]]
+## 4) [[5 Flask APIs]]
+## 5) [[3 Flask Authentication]]
+## 6) [[6 Flask_restful API Web Framework]]
 
 
 ## 📚 **Suggested Next Topics for Separate Notes:**
