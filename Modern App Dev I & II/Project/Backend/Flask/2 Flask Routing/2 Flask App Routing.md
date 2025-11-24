@@ -26,6 +26,17 @@ def index():
 @app.route('/hello')  # URL: http://127.0.0.1:5000/hello
 def hello():
     return 'Hello, World'
+    
+ if __name__ == "__main__": # It runs your Flask app only when the file is executed directly with 'python main.py'
+	app.run(debug=True)	    # `debug=True` lets you auto-reload and see detailed error info.
+      
+    
+# Note:
+# Flask(): Instantiates a new Flask application object — think of it as launching the main service container for your web app.
+# __name__: Tells Flask _where_ it’s running. This enables Flask to:
+#    - Auto-locate templates and static files
+#    - Map routes intelligently
+#    - Manage imports cleanly
 ```
 
 ### Routing Lifecycle
@@ -252,17 +263,20 @@ def index():
 ### Basic Examples
 
 ```python
-from flask import Flask, url_for
+# ---save as url_for_method.py---
+
+from flask import Flask, url_for, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return 'index'
+# render_template usage example
+@app.route('/<username>/<int:page>')
+def index(username, page):
+    return render_template('index.html', username=username, page=page)
 
 @app.route('/login')
 def login():
-    return 'login'
+    return 'login page'
 
 @app.route('/user/<username>')
 def profile(username):
@@ -270,17 +284,18 @@ def profile(username):
 
 # Test URL generation
 with app.test_request_context():
-    print(url_for('index'))                           # /
-    print(url_for('login'))                           # /login
-    print(url_for('login', next='/'))                 # /login?next=/
-    print(url_for('profile', username='John Doe'))    # /user/John%20Doe
-    print(url_for('profile', username='alice', page=2))  # /user/alice?page=2
+    print(url_for('login'))                                 # /login
+    print(url_for('login', next='/'))                       # /login?next=/
+    print(url_for('profile', username='John Doe'))          # /user/John%20Doe
+    print(url_for('profile', username='alice', page=2))     # /user/alice?page=2 
+
+if __name__ == "__main__":
+    app.run(debug=True)
 ```
 
 **Output:**
 
 ```
-/
 /login
 /login?next=/
 /user/John%20Doe
@@ -298,18 +313,40 @@ with app.test_request_context():
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <!-- Internal links -->
-    <a href="{{ url_for('login') }}">Login</a>
-    <a href="{{ url_for('profile', username='john') }}">John's Profile</a>
-    
-    <!-- With query parameters -->
-    <a href="{{ url_for('search', q='flask', page=1) }}">Search</a>
-    
     <!-- Static images -->
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    <div class="logo container mt-4 mb-4 text-center" style="width: 10px; height: 10px;">
+        <img class="logo-img" style="width: 100px; height: auto;" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    </div>
+
+    <!-- Internal links -->
+    <div style="margin-left: 120px; margin-top: 35px;">
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('profile', username=username) }}">Profile</a>
+    </div>
+
 </body>
 </html>
+
 ```
+
+```bash
+Folder Strucutre
+my_flask_app/
+├── url_for_method.py
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── images/
+│       └── logo.png
+└── templates/
+    └── index.html
+```
+```bash
+python3 url_for_method.py
+```
+#### In Browser
+![[url1.png]]  
+![[url2.png]]   ![[url3.png]]
 
 ### Advanced: External URLs
 
@@ -334,7 +371,10 @@ By default, routes only respond to `GET` requests. Use the `methods` parameter t
 ### Basic HTTP Methods
 
 ```python
-from flask import request
+# ---save as http_methods.py---
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -353,12 +393,18 @@ def login():
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    return {'data': 'value'}
+    return jsonify({'data': 'value'})
 
 @app.route('/api/user', methods=['POST'])
 def create_user():
-    return {'message': 'User created'}, 201
+    return jsonify({'message': 'User created'}), 201
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
 ```
+#### In Browser
+![[http1.png]]  ![[http2.png]]  ![[http3.png]]
 
 ### Common HTTP Methods
 
@@ -602,6 +648,7 @@ It's useful for:
 ## 9. Complete Example
 
 ```python
+# ---save as app.py---
 from flask import Flask, render_template, request, url_for, abort
 from markupsafe import escape
 
@@ -666,6 +713,7 @@ python app.py
 flask --app app run
 ```
 
+![[approut1.png]] 
 ---
 
 ## 10. Summary

@@ -1,0 +1,21 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Static files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Static images -->
+    <div class="logo container mt-4 mb-4 text-center" style="width: 10px; height: 10px;">
+        <img class="logo-img" style="width: 100px; height: auto;" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    </div>
+
+    <!-- Internal links -->
+    <div style="margin-left: 120px; margin-top: 35px;">
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('profile', username=username) }}">Profile</a>
+    </div>
+
+</body>
+</html>
