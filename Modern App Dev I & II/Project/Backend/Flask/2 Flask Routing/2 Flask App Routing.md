@@ -49,10 +49,6 @@ flowchart TD
     C -->|No| E[Return 404 Error]
     D --> F["Generate Response<br/>'Hello, World'"]
     F --> G[Send Response to Browser]
-    
-    style D fill:#c8e6c9
-    style E fill:#ffcdd2
-    style F fill:#fff9c4
 ```
 
 ---
